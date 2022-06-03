@@ -73,7 +73,7 @@ while ~isempty(email_contents)
     end;
 
     % Skip the word if it is too short
-    if length(str) < 1
+    if length(str) <= 2
        continue;
     end
 
@@ -85,17 +85,7 @@ while ~isempty(email_contents)
     %fprintf('%s ', str);
     %l = l + length(str) + 1;
     
-    comp = strcmp(vocabList, str);
-    if (!comp)
-      ind = ind + 1;
-      vocabList{ind, 1} = str;
-      vocabList{ind, 2} = 0;
-      vocabList{ind, 2} = vocabList{ind, 2} + 1;
-    else
-      ind_word = find(strcmp(vocabList, str));
-      vocabList{ind_word, 2} = vocabList{ind_word, 2} + 1;
-    endif
-    
+    [vocabList, ind] = addWordToList(vocabList, str, ind);   
 
 end
 
